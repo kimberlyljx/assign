@@ -1,18 +1,21 @@
 <div class="container">
   <h1>Choose a deck, <%= @user.username %></h1>
 
+<%if @decks.count > 0 %>
   <p><% @decks.each do |deck| %>
   <%= deck.id %>
   <%= deck.name %>
   <%= deck.created_at %>
-   <form action="/decks/<%= deck.id %>" method="get">
+  <form action="/decks/<%= deck.id %>" method="get">
     <input type="submit" value="I want to play this deck!">
   </form>
-  <% end %>
-</p>
+  <% end %></p>
+<% end %><br>
 
-
-
-
+ <form action="/decks" method="post">
+  <input type="text" placeholder="Name of Deck" name="name">
+  <input type="submit" value="Create a deck!">
+</form>
 
 </div>
+

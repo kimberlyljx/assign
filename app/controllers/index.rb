@@ -39,8 +39,16 @@ get '/decks' do
 end
 
 post '/decks' do
-  @deck = Deck.create(params[:deck])
-  erb :decks
+  @user = current_user
+  @deck = Deck.create(name: params[:name], user_id: @user.id)
+  erb :cards
+end
+
+post '/cards' do
+  @deck = Deck.where(id: params[:deck_id])
+  byebug
+  @card = Card.create(english: params[:english], other: params[:other], deck_id: @deck.id)
+  erb :cards
 end
 
 # e.g., /q6bda
@@ -59,6 +67,7 @@ post '/users/sign_up' do
   # @user = User.create(username: params[:username],
    # email: params[:email], password: params[:password])
   session[:user_id] = @user.id
+  @decks = Deck.all
   erb :decks
 end
 
@@ -79,22 +88,27 @@ end
 
 post '/round' do
   @n = 0
-  @round = Round.create(deck_id: 1)
-  @deck = Deck.where(id: 1).first
-  z = @deck
-
+  @round = Round.create(deck_id: params[:deck_id])
+  @deck = Deck.where(id: params[:deck_id]).first
   erb :plays
 end
 
 post '/play' do
-  if card[other] == @d.other
+
+  @round = Round.where(id: params[:round_id].to_i).first
+  if params[:other] == params[:word]
     puts "correct"
     @round.total_card += 1
     @round.total_correct += 1
+    redirect to "/decks/:deck_id"
   else
     puts "wrong"
     @round.total_card += 1
     @round.total_incorrect += 1
     erb :plays
   end
+end
+
+get '/logout' do
+  session.clear
 end
