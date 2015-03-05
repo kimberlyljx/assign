@@ -1,0 +1,12 @@
+<div class="container">
+
+<p><%= z.cards.first.id %>
+  <%= z.cards.first.english %>
+  <form action="/play" method="post">
+    <input type="text" name="card[other]" placeholder="Malaysian">
+    <input type="submit" value="Is this correct?">
+  </form>
+  <% @n += 1 %>
+  </p>
+
+</div>
