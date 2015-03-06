@@ -94,17 +94,23 @@ post '/round' do
 end
 
 post '/play' do
+  @deck = Deck.find(params[:current_deck_id])
+  @round = Round.find(params[:round_id])
 
-  @round = Round.where(id: params[:round_id].to_i).first
   if params[:other] == params[:word]
     puts "correct"
     @round.total_card += 1
     @round.total_correct += 1
-    redirect to "/decks/:deck_id"
+    @round.total_guess += 1
+    @round.save
+    byebug
+    redirect to "/decks"
   else
     puts "wrong"
+    @round.total_guess += 1
     @round.total_card += 1
     @round.total_incorrect += 1
+    @round.save
     erb :plays
   end
 end
