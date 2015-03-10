@@ -24,6 +24,10 @@ before do
 end
 
 get '/' do
+<<<<<<< HEAD
+=======
+  # Look in app/views/index.erb
+>>>>>>> 167922b9185f452122f848c1a5cc1eaabbb9bf33
   erb :index
 end
 
@@ -44,8 +48,14 @@ post '/decks' do
 end
 
 post '/cards' do
+<<<<<<< HEAD
   @deck = Deck.find(params[:deck_id])
   @card = Card.create(english: params[:english], other: params[:other], deck_id: params[:deck_id])
+=======
+  @deck = Deck.where(id: params[:deck_id])
+  byebug
+  @card = Card.create(english: params[:english], other: params[:other], deck_id: @deck.id)
+>>>>>>> 167922b9185f452122f848c1a5cc1eaabbb9bf33
   erb :cards
 end
 
@@ -62,6 +72,11 @@ end
 
 post '/users/sign_up' do
   @user = User.create(params[:user])
+<<<<<<< HEAD
+=======
+  # @user = User.create(username: params[:username],
+   # email: params[:email], password: params[:password])
+>>>>>>> 167922b9185f452122f848c1a5cc1eaabbb9bf33
   session[:user_id] = @user.id
   @decks = Deck.all
   erb :decks
@@ -85,8 +100,12 @@ end
 post '/round' do
   @n = 0
   @round = Round.create(deck_id: params[:deck_id])
+<<<<<<< HEAD
   @deck = Deck.find(params[:deck_id])
   byebug
+=======
+  @deck = Deck.where(id: params[:deck_id]).first
+>>>>>>> 167922b9185f452122f848c1a5cc1eaabbb9bf33
   erb :plays
 end
 
