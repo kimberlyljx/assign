@@ -1,0 +1,22 @@
+<div class="container">
+
+  <h1>Your rounds with deck:
+  <%= @deck.id %>. <%= @deck.name %></h1>
+
+  <%if @rounds != nil %>
+  <p><% @rounds.each do |d| %><br>
+  Round ID: <%= d.id %><br>
+  Total Guesses: <%= d.total_guess %><br>
+  Total Cards: <%= d.total_card %><br>
+  Total Correct: <%= d.total_correct %><br>
+  Total Incorrect: <%= d.total_incorrect %><br>
+  Played at: <%= d.created_at %><br>
+  <% end %></p>
+  <% end %>
+
+  <form action="/round" method="post">
+    <input type="hidden" value= <%= @deck.id %> name= "deck_id">
+    <input type="submit" value="Play!">
+  </form>
+
+</div>

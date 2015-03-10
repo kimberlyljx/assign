@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Create a card for deck id: <%= @deck.id %> deck name: <%= @deck.name %></h1>
+
+   <form action="/cards" method="post">
+    <input type="text" placeholder="Input the deck no." name="deck_id">
+    <input type="text" placeholder="English" name="english">
+    <input type="text" placeholder="Other Language" name="other">
+    <input type="submit" value="Create card!">
+  </form>
+  </p>
+
+</div>

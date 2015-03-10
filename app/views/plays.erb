@@ -1,0 +1,14 @@
+<div class="container">
+
+  <p><%= @deck.cards.first.english %> for round <%= @round.id %>
+  <form action="/play" method="post">
+    <input type="hidden" name="current_deck_id" value ="<%= @deck.id %>" >
+    <input type="hidden" name="round_id" value= "<%= @round.id %>" >
+    <input type="hidden" name="word" value= "<%= @deck.cards.first.other %>">
+    <input type="text" name="other" placeholder="Translate to Malaysian">
+    <input type="submit" value="Is this correct?">
+  </form>
+
+  </p>
+
+</div>
